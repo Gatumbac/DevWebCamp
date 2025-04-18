@@ -1,0 +1,35 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color';
+
+.form {
+    display: flex;
+    flex-direction: column;
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    &__label {
+        display: block;
+        font-size: 1.8rem;
+        color: rgba(v.$black, .8);
+    }
+
+    &__input {
+        padding: 1rem;
+        border: 1px solid color.adjust(v.$lightGray, $lightness: -20%);
+        border-radius: .5rem;
+    }
+
+    &__submit {
+        @include m.button(v.$blue, v.$white, 1.5rem);
+        @include m.tablet {
+            width: auto;
+            align-self: flex-start;
+        }
+    }
+}

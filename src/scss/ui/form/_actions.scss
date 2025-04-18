@@ -1,0 +1,21 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.actions {
+    margin: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    @include m.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__link {
+        font-size: 1.6rem;
+        font-weight: v.$thin;
+        color: v.$black;
+    }
+}
