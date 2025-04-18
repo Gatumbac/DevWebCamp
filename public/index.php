@@ -7,8 +7,8 @@ use MVC\Router;
 $router = new Router();
 
 //Public Zone
-$router->get('/', [AuthController::class, 'login']);
-$router->post('/', [AuthController::class, 'processLogin']);
+$router->get('/login', [AuthController::class, 'login']);
+$router->post('/login', [AuthController::class, 'processLogin']);
 $router->get('/logout', [AuthController::class, 'logout']);
 
 $router->get('/crear-cuenta', [AuthController::class, 'signup']);

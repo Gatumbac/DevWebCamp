@@ -1,0 +1,76 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.header {
+    min-height: 60rem;
+    background-image: url(../img/graphic.svg), url(../img/graphic.svg), linear-gradient(to right, rgba(v.$black, 1), rgba(v.$black, .5)), image-set(url(../img/header.avif) 1x, url(../img/header.webp) 1x, url(../img/header.webp) 1x);
+    background-repeat: no-repeat;
+    background-size: 40rem, 40rem, cover, cover;
+    background-position: top left, bottom right, center, center;
+
+    &__container {
+        @include m.container;
+    }
+
+    &__nav {
+        padding: 5rem 0;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+
+        @include m.tablet {
+            justify-content: flex-end;
+        }
+    }
+
+    &__link {
+        color: v.$white;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        font-weight: v.$bold;
+
+        &:hover {
+            color: v.$blue;
+        }
+    }
+
+    &__content {
+        padding-top: 10rem;
+
+        @include m.tablet {
+            padding-top: 5rem;
+        }
+    }
+
+    &__logo {
+        @include m.fluidText(2rem, 8rem);
+        @include m.degradedText(v.$blue, v.$turquoise);
+        text-align: center;
+        @include m.tablet {
+            text-align: left;
+            display: inline-block;
+        }
+    }
+
+    &__text {
+        font-weight: v.$bold;
+        font-size: 3rem;
+        color: v.$white;
+        margin: 2rem 0;
+        text-align: center;
+        text-transform: uppercase;
+        @include m.tablet {
+            text-align: left;
+        }
+
+        &--mode {
+            font-size: 2rem;
+        }
+    }
+
+    &__button {
+        text-transform: uppercase;
+        @include m.button(v.$turquoise, v.$white);
+    }
+
+}

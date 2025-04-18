@@ -67,7 +67,7 @@
     </form>
 
     <div class="actions">
-        <a class="actions__link" href="/">¿Ya tienes una cuenta? <span>Iniciar Sesión</span></a>
+        <a class="actions__link" href="/login">¿Ya tienes una cuenta? <span>Iniciar Sesión</span></a>
         <a class="actions__link" href="/olvide-password">¿Olvidaste tu password?</a>
     </div>
 </main>

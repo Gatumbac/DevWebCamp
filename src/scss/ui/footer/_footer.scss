@@ -1,0 +1,39 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color';
+
+.footer {
+    background-color: v.$blue;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    color: v.$white;
+
+    &__container {
+        @include m.container;
+
+        @include m.tablet {
+            @include m.grid(2, 3rem);
+        }
+    }
+
+    &__logo {
+        @include m.fluidText(2rem, 4rem);
+        @include m.logo;
+    }
+
+    &__text {
+        line-height: 2;
+        text-align: center;
+
+        @include m.tablet {
+            text-align: left;
+        }
+    }
+
+    &__copyright {
+        background-color: color.adjust(v.$blue, $lightness: -10%);
+        margin: 3rem 0 0 0;
+        padding: 2rem 0;
+        text-align: center;
+    }
+}
