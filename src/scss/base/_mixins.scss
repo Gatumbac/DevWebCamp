@@ -140,3 +140,9 @@
         display: none;
     }
 }
+
+@mixin alert($color) {
+    background-color: color.adjust($color, $lightness: 55%);
+    border-left: .5rem solid $color;
+    color: color.adjust($color, $lightness: -10%);
+}

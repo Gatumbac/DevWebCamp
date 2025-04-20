@@ -18,9 +18,8 @@ class Email {
 
         $content = "<html>";
         $content.="<p><strong>Hola " . $this->name . "</strong></p>";
-        $content.="<p>Has creado tu cuenta en UpTask, solo debes confirmarla presionando el siguiente enlace: </p>";
+        $content.="<p>Has creado tu cuenta en DevWebCamp, solo debes confirmarla presionando el siguiente enlace: </p>";
         $content .= "<a href='{$_ENV['APP_URL']}/confirmar-cuenta?token={$this->token}'>Confirmar cuenta</a>";
-        //$content.="<a href='" . $_ENV['APP_URL'] . "/confirmar-cuenta?token=" . $this->token . "' >Confirmar cuenta</a>";
         $content.="<p>Si tu no solicitaste esta cuenta, puedes ignorar este mensaje.</p>";
         $content.= "</html>";
         $phpmailer->Body = $content;
@@ -32,9 +31,8 @@ class Email {
 
         $content = "<html>";
         $content.="<p><strong>Hola " . $this->name . "</strong></p>";
-        $content.="<p>Has solicitado reestablecer tu password en UpTask, da click en el siguiente enlace para hacerlo: </p>";
-        $content .= "<a href='{$_ENV['APP_URL']}/resetear-password?token={$this->token}'>Reestablecer password</a>";
-        //$content.="<a href='" . $_ENV['APP_URL'] . "/recuperar?token=" . $this->token . "' >Reestablecer password</a>";
+        $content.="<p>Has solicitado reestablecer tu password en DevWebCamp, da click en el siguiente enlace para hacerlo: </p>";
+        $content .= "<a href='{$_ENV['APP_URL']}/reestablecer-password?token={$this->token}'>Reestablecer password</a>";
         $content.="<p>Si tu no solicitaste esta cuenta, puedes ignorar este mensaje.</p>";
         $content.= "</html>";
         $phpmailer->Body = $content;
@@ -50,7 +48,7 @@ class Email {
         $phpmailer->Username = $_ENV['EMAIL_USER'];
         $phpmailer->Password = $_ENV['EMAIL_PASS'];
 
-        $phpmailer->setFrom('cuentas@uptask.com');
+        $phpmailer->setFrom('admin@devwebcamp.com');
         $phpmailer->addAddress($recipientEmail, $recipientName);
         $phpmailer->Subject = $subject;
 

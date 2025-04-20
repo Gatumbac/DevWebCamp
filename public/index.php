@@ -17,8 +17,8 @@ $router->post('/crear-cuenta', [AuthController::class, 'processSignup']);
 $router->get('/olvide-password', [AuthController::class, 'forgotPassword']);
 $router->post('/olvide-password', [AuthController::class, 'processForgotPassword']);
 
-$router->get('/resetear-password', [AuthController::class, 'resetPassword']);
-$router->post('/resetear-password', [AuthController::class, 'processResetPassword']);
+$router->get('/reestablecer-password', [AuthController::class, 'resetPassword']);
+$router->post('/reestablecer-password', [AuthController::class, 'processResetPassword']);
 
 $router->get('/revisar-correo', [AuthController::class, 'emailInstructions']);
 $router->get('/confirmar-cuenta', [AuthController::class, 'confirmAccount']);

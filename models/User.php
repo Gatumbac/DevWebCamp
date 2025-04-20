@@ -4,7 +4,7 @@ namespace Model;
 
 class User extends ActiveRecord {
     protected static $dbTable = 'USERS';
-    protected static $dbColumns = ['id', 'name', 'lastname', 'email', 'password', 'confirmed', 'token'];
+    protected static $dbColumns = ['id', 'name', 'lastname', 'email', 'password', 'confirmed', 'admin', 'token'];
 
     protected $id;
     protected $name;
@@ -14,6 +14,7 @@ class User extends ActiveRecord {
     protected $repeatedPassword;
     protected $currentPassword;
     protected $confirmed;
+    protected $admin;
     protected $token;
 
     public function __construct($args = []) {
@@ -25,7 +26,8 @@ class User extends ActiveRecord {
         $this->repeatedPassword = $args['repeatedPassword'] ?? '';
         $this->currentPassword = $args['currentPassword'] ?? '';
         $this->confirmed = $args['confirmed'] ?? '0';
-        $this->token = $args['token'] ?? '';
+        $this->admin = $args['admin'] ?? '0';
+        $this->token = $args['token'] ?? null;
     }
 
     public function getId() {
@@ -192,7 +194,7 @@ class User extends ActiveRecord {
     public function checkPasswordCredentials($password) {
         $isCorrectPassword = password_verify($password, $this->getPassword());
         if (!$isCorrectPassword) {
-            self::$alerts['error'][] = 'La contraseña actual de la cuenta es incorrecta';
+            self::$alerts['error'][] = 'Password Incorrecto';
         }
         return $isCorrectPassword;
     }
@@ -203,6 +205,12 @@ class User extends ActiveRecord {
         $_SESSION['name'] = $this->getFullName();
         $_SESSION['email'] = $this->email;
         $_SESSION['login'] = true;
-        redirect('/dashboard');
+
+        if ($this->admin === '1') {
+            $_SESSION['admin'] = true;
+            redirect('/dashboard');
+        }
+
+        redirect('/finalizar-registro');
     }
 }

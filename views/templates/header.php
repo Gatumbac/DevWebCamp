@@ -11,7 +11,7 @@
             </a>
             <p class="header__text">Agosto 5-6 | 2025</p>
             <p class="header__text header__text--mode">En Línea - Presencial</p>
-            <a class="header__button" href="/">Comprar Pase</a>
+            <a class="header__button" href="/crear-cuenta">Comprar Pase</a>
         </div>
     </div>
 </header>

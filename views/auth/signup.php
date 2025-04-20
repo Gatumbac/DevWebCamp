@@ -2,7 +2,11 @@
     <h2 class="auth__heading"><?php echo $title; ?></h2>
     <p class="auth__text">Crea tu cuenta en DevWebCamp</p>
 
-    <form class="form" action="/crear-cuenta">
+    <?php
+    require_once __DIR__ . '/../templates/alerts.php';
+    ?>
+
+    <form class="form" method="POST" action="/crear-cuenta">
         <div class="form__field">
             <label class="form__label" for="name">Nombre</label>
             <input 
@@ -11,6 +15,7 @@
                 type="text"
                 placeholder="Tu nombre"
                 class="form__input"
+                value="<?php echo s($user->getName()); ?>"
                 required
             >
         </div>
@@ -23,6 +28,7 @@
                 type="text"
                 placeholder="Tu apellido"
                 class="form__input"
+                value="<?php echo s($user->getLastName()); ?>"
                 required
             >
         </div>
@@ -35,6 +41,7 @@
                 type="email"
                 placeholder="Tu email"
                 class="form__input"
+                value="<?php echo s($user->getEmail()); ?>"
                 required
             >
         </div>

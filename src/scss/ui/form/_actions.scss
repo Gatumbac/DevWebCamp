@@ -13,6 +13,11 @@
         justify-content: space-between;
     }
 
+    &--center {
+        @extend .actions;
+        justify-content: center;
+    }
+
     &__link {
         font-size: 1.6rem;
         font-weight: v.$thin;

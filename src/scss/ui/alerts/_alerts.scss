@@ -1,0 +1,19 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color';
+
+.alert {
+    padding: 1.5rem 1.5rem 1.5rem 3rem;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    font-size: 1.3rem;
+    font-weight: v.$bold;
+
+    &__error {
+        @include m.alert(v.$red);
+    }
+
+    &__success {
+        @include m.alert(v.$green);
+    }
+}

@@ -65,7 +65,6 @@ class AuthController {
             if($user->validateUniqueUser()) {
                 $user->hashPassword();
                 $user->generateToken();
-
                 $email = new Email($user->getEmail(), $user->getName(), $user->getToken());
                 $email->sendAccountConfirmation();
 
@@ -126,19 +125,19 @@ class AuthController {
         $token = s($_GET['token']) ?? '';
         verify($token, '/');
         $user = User::where('token', $token);
-        $mostrar = true;
+        $show = true;
 
         if (is_null($user)) {
             User::setAlert('error', 'Token no válido');
-            $mostrar = false;
+            $show = false;
         } 
 
         $alerts = User::getAlerts();
 
         $router->render('auth/reset-password', [
-            'title' => 'Reestablecer contraseña',
+            'title' => 'Reestablecer Password',
             'alerts' => $alerts,
-            'mostrar' => $mostrar
+            'show' => $show
         ]);
     }
 
@@ -148,7 +147,7 @@ class AuthController {
         verify($user, '/');
 
         $formUser = new User($_POST);
-        $formUser->validatePassword();
+        $formUser->validatePasswordForm();
         $alerts = User::getAlerts();
 
         if (empty($alerts)) {
@@ -157,14 +156,14 @@ class AuthController {
 
             $user->setToken(null);
             if($user->save()) {
-                redirect('/');
+                redirect('/login');
             }
         }
 
         $router->render('auth/reset-password', [
-            'title' => 'Reestablecer contraseña',
+            'title' => 'Reestablecer Password',
             'alerts' => $alerts,
-            'mostrar' => true
+            'show' => true
         ]);
     }
 
@@ -176,7 +175,7 @@ class AuthController {
 
     public static function confirmAccount(Router $router) {
         $token = s($_GET['token']) ?? '';
-        verify($token, '/');
+        verify($token, '/login');
         $user = User::where('token', $token);
 
         if (is_null($user)) {
@@ -193,7 +192,7 @@ class AuthController {
         $alerts = User::getAlerts();
 
         $router->render('auth/confirm-account', [
-            'title' => 'Verificar cuenta',
+            'title' => 'Confirmar Cuenta',
             'alerts' => $alerts
         ]);
     }
