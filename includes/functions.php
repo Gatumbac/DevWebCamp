@@ -30,3 +30,7 @@ function isAuth() {
         exit;
     }
 }
+
+function verifyActualPage(string $path) : bool {
+    return str_contains($_SERVER['PATH_INFO'], $path);
+}

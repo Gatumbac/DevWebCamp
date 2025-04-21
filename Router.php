@@ -36,10 +36,17 @@ class Router {
         foreach($data as $key=>$value) {
             $$key = $value;
         }
-        
+
         ob_start();
         include_once __DIR__ . '/views/' . $view . '.php';
         $content = ob_get_clean();
-        include __DIR__ . '/views/layout.php';
+
+        $currentUrl = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
+        if (str_contains($currentUrl, '/admin')) {
+            include __DIR__ . '/views/admin-layout.php';
+        } else {
+            include __DIR__ . '/views/layout.php';
+        }
+
     }
 }

@@ -45,7 +45,7 @@ class AuthController {
     public static function logout() {
         session_start();
         $_SESSION = [];
-        redirect('/');
+        redirect('/login');
     }
 
     public static function signUp(Router $router) {

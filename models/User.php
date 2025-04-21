@@ -208,7 +208,7 @@ class User extends ActiveRecord {
 
         if ($this->admin === '1') {
             $_SESSION['admin'] = true;
-            redirect('/dashboard');
+            redirect('/admin/dashboard');
         }
 
         redirect('/finalizar-registro');

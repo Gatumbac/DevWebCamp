@@ -63,6 +63,11 @@
     margin: 0 auto;
 }
 
+@mixin mediumContainer {
+    width: min(95%, 80rem);
+    margin: 0 auto;
+}
+
 @mixin smallContainer {
     width: min(95%, 60rem);
     margin: 0 auto;
@@ -145,4 +150,21 @@
     background-color: color.adjust($color, $lightness: 55%);
     border-left: .5rem solid $color;
     color: color.adjust($color, $lightness: -10%);
+}
+
+@mixin link {
+    all: unset;
+    color: v.$white;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: v.$bold;
+
+    &:hover {
+        color: v.$blue;
+        cursor: pointer;
+    }
+}
+
+@mixin shadow {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }

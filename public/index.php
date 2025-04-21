@@ -1,7 +1,12 @@
 <?php 
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\AttendeeController;
 use Controllers\AuthController;
+use Controllers\DashboardController;
+use Controllers\EventController;
+use Controllers\GiftController;
+use Controllers\SpeakerController;
 use MVC\Router;
 
 $router = new Router();
@@ -22,6 +27,15 @@ $router->post('/reestablecer-password', [AuthController::class, 'processResetPas
 
 $router->get('/revisar-correo', [AuthController::class, 'emailInstructions']);
 $router->get('/confirmar-cuenta', [AuthController::class, 'confirmAccount']);
+
+//Admin Zone
+$router->get('/admin/dashboard', [DashboardController::class, 'index']);
+$router->get('/admin/ponentes', [SpeakerController::class, 'index']);
+$router->get('/admin/ponentes/crear', [SpeakerController::class, 'create']);
+$router->get('/admin/eventos', [EventController::class, 'index']);
+$router->get('/admin/registrados', [AttendeeController::class, 'index']);
+$router->get('/admin/regalos', [GiftController::class, 'index']);
+
 
 $router->checkRoute();
 
