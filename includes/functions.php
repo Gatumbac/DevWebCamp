@@ -1,4 +1,5 @@
 <?php
+define('IMAGE_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/images/');
 
 function debug($variable) : string {
     echo "<pre>";

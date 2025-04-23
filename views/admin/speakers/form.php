@@ -35,7 +35,7 @@
             type="text"
             placeholder="Ciudad Ponente"
             class="form__input"
-            value="<?php echo s($speaker->getLastName()); ?>"
+            value="<?php echo s($speaker->getCity()); ?>"
             required
         >
     </div>
@@ -48,7 +48,7 @@
             type="text"
             placeholder="País Ponente"
             class="form__input"
-            value="<?php echo s($speaker->getLastName()); ?>"
+            value="<?php echo s($speaker->getCountry()); ?>"
             required
         >
     </div>
@@ -60,7 +60,6 @@
             name="image"
             type="file"
             class="form__input form__input--file"
-            required
         >
     </div>
 
@@ -76,10 +75,9 @@
             type="text"
             placeholder="Ej. Node.js, PHP, CSS, Laravel, UX/UI"
             class="form__input"
-            required
         >
 
-        <div id="tags" class="form__tagList"></div>
+        <ul id="tags" class="form__tagList"></ul>
 
         <input type="hidden" name="tags" value="<?php echo '' ?>">
     </div>
@@ -100,7 +98,6 @@
                 class="form__input--social"
                 name="networks[facebook]"
                 value ="<?php echo ''; ?>"
-                required
             >
         </div>
     </div>
@@ -116,7 +113,6 @@
                 class="form__input--social"
                 name="networks[twitter]"
                 value ="<?php echo ''; ?>"
-                required
             >
         </div>
     </div>
@@ -132,7 +128,6 @@
                 class="form__input--social"
                 name="networks[youtube]"
                 value ="<?php echo ''; ?>"
-                required
             >
         </div>
     </div>
@@ -148,7 +143,6 @@
                 class="form__input--social"
                 name="networks[instagram]"
                 value ="<?php echo ''; ?>"
-                required
             >
         </div>
     </div>
@@ -164,7 +158,6 @@
                 class="form__input--social"
                 name="networks[tiktok]"
                 value ="<?php echo ''; ?>"
-                required
             >
         </div>
     </div>
@@ -180,9 +173,14 @@
                 class="form__input--social"
                 name="networks[github]"
                 value ="<?php echo ''; ?>"
-                required
             >
         </div>
     </div>
 
 </fieldset>
+
+<?php 
+    $script = "
+        <script src=/build/js/tags.js></script>
+    "
+?>

@@ -32,6 +32,7 @@ $router->get('/confirmar-cuenta', [AuthController::class, 'confirmAccount']);
 $router->get('/admin/dashboard', [DashboardController::class, 'index']);
 $router->get('/admin/ponentes', [SpeakerController::class, 'index']);
 $router->get('/admin/ponentes/crear', [SpeakerController::class, 'create']);
+$router->post('/admin/ponentes/crear', [SpeakerController::class, 'processCreation']);
 $router->get('/admin/eventos', [EventController::class, 'index']);
 $router->get('/admin/registrados', [AttendeeController::class, 'index']);
 $router->get('/admin/regalos', [GiftController::class, 'index']);
