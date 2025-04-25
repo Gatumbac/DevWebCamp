@@ -39,12 +39,20 @@ class Speaker extends ActiveRecord {
         return $this->lastname;
     }
 
+    public function getFullName() {
+        return $this->name . ' ' . $this->lastname;
+    }
+
     public function getCity() {
         return $this->city;
     }
 
     public function getCountry() {
         return $this->country;
+    }
+
+    public function getLocation() {
+        return $this->city . ', ' . $this->country;
     }
 
     public function getImage() {
@@ -99,7 +107,7 @@ class Speaker extends ActiveRecord {
         if(!$this->lastname || strlen($this->lastname) < 3) {
             self::$alerts['error'][] = 'El Apellido es Obligatorio y debe ser válido';
         }
-        if(!$this->city || strlen($this->city) < 3) {
+        if(!$this->city || strlen($this->city) < 2) {
             self::$alerts['error'][] = 'El Campo Ciudad es Obligatorio';
         }
         if(!$this->country || strlen($this->country) < 3) {

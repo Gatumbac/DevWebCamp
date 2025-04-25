@@ -9,6 +9,7 @@
     })
     
     function start() {
+        getTags();
         addTagsListener();
     }
     
@@ -16,7 +17,7 @@
         tagInput.addEventListener('keyup', function(e) {
             if(e.key === ',') {
                 const tag = e.target.value.replace(',', '').trim();
-                if(tag.length > 2) {
+                if(tag.length > 1) {
                     tagList = [...tagList, tag]
                     showTags();
                     updateInputHidden();
@@ -46,5 +47,12 @@
         e.target.remove();
         tagList = tagList.filter(tag => tag != e.target.textContent);
         updateInputHidden();
+    }
+
+    function getTags() {
+        if(tagInputHidden.value) {
+            tagList = tagInputHidden.value.split(",");
+        }
+        showTags();
     }
 })();

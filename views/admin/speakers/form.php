@@ -61,6 +61,16 @@
             type="file"
             class="form__input form__input--file"
         >
+        <?php if($speaker->getImage()): ?> 
+            <p class="form__text">Imagen Actual:</p>
+            <div class="form__image">
+                <picture>
+                    <source srcset="<?php echo '/build/img/speakers/' . $speaker->getImage() . '.webp'; ?>" type="image/webp">
+                    <source srcset="<?php echo '/build/img/speakers/' . $speaker->getImage() . '.png'; ?>" type="image/png">
+                    <img src="<?php echo '/build/img/speakers/' . $speaker->getImage() . '.png'; ?>" alt="Imagen Ponente">
+                </picture>
+            </div>
+        <?php endif; ?>
     </div>
 
 </fieldset>
@@ -79,14 +89,13 @@
 
         <ul id="tags" class="form__tagList"></ul>
 
-        <input type="hidden" name="tags" value="<?php echo '' ?>">
+        <input type="hidden" name="tags" value="<?php echo s($speaker->getTags())?>">
     </div>
 
 </fieldset>
 
 <fieldset class="form__fieldset">
     <legend class="form__legend">Redes Sociales</legend>
-
     <div class="form__field">
         <div class="form__iconContainer">
             <div class="form__icon">
@@ -97,7 +106,7 @@
                 placeholder="Facebook"
                 class="form__input--social"
                 name="networks[facebook]"
-                value ="<?php echo ''; ?>"
+                value ="<?php echo $networks["facebook"] ?? ''; ?>"
             >
         </div>
     </div>
@@ -112,7 +121,7 @@
                 placeholder="Twitter"
                 class="form__input--social"
                 name="networks[twitter]"
-                value ="<?php echo ''; ?>"
+                value ="<?php echo $networks["twitter"] ?? ''; ?>"
             >
         </div>
     </div>
@@ -127,7 +136,7 @@
                 placeholder="Youtube"
                 class="form__input--social"
                 name="networks[youtube]"
-                value ="<?php echo ''; ?>"
+                value ="<?php echo $networks["youtube"] ?? ''; ?>"
             >
         </div>
     </div>
@@ -142,7 +151,7 @@
                 placeholder="Instagram"
                 class="form__input--social"
                 name="networks[instagram]"
-                value ="<?php echo ''; ?>"
+                value ="<?php echo $networks["instagram"] ?? ''; ?>"
             >
         </div>
     </div>
@@ -157,7 +166,7 @@
                 placeholder="TikTok"
                 class="form__input--social"
                 name="networks[tiktok]"
-                value ="<?php echo ''; ?>"
+                value ="<?php echo $networks["tiktok"] ?? ''; ?>"
             >
         </div>
     </div>
@@ -172,7 +181,7 @@
                 placeholder="GitHub"
                 class="form__input--social"
                 name="networks[github]"
-                value ="<?php echo ''; ?>"
+                value ="<?php echo $networks["github"] ?? ''; ?>"
             >
         </div>
     </div>

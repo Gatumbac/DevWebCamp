@@ -11,14 +11,16 @@ class ImageHandler {
     }
 
     public static function getRandomName() {
-        return md5( uniqid (rand(), true) ) . ".jpg";
+        return md5( uniqid (rand(), true));
     }
 
-    public static function processImage($file, $imageName) {
-        self::createDirectory();
+    public static function processImage($file, $imageName, $imageFolder) {
+        self::createDirectory($imageFolder);
+
         $manager = new Image(new Driver());
-        $imagen = $manager->read($file["tmp_name"])->cover(800,600);
-        $imagen->save(IMAGE_FOLDER . $imageName);
+        $image = $manager->read($file["tmp_name"])->cover(800,800);
+        $image->save($imageFolder . $imageName . '.png');
+        $image->save($imageFolder . $imageName . '.webp');
     }
 
     public static function deleteImage($route) {

@@ -1,5 +1,5 @@
 <?php
-define('IMAGE_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/images/');
+define('IMAGE_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/build/img');
 
 function debug($variable) : string {
     echo "<pre>";
@@ -26,8 +26,17 @@ function redirect($location) {
 }
 
 function isAuth() {
+    session_start();
     if (!isset($_SESSION['login'])) {
-        header('Location: /');
+        header('Location: /login');
+        exit;
+    }
+}
+
+function isAdmin() {
+    session_start();
+    if (!isset($_SESSION['admin'])) {
+        header('Location: /login');
         exit;
     }
 }
