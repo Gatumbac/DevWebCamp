@@ -2,17 +2,34 @@
 namespace Controllers;
 
 use Classes\ImageHandler;
+use Classes\Paginator;
 use MVC\Router;
 use Model\Speaker;
 
 class SpeakerController {
     public static function index(Router $router) {
         isAdmin();
-        $speakers = Speaker::all();
+
+        $currentPage = $_GET['page'] ?? '';
+        $currentPage = filter_var($currentPage, FILTER_VALIDATE_INT);
+        if (!$currentPage || $currentPage < 1) {
+            redirect('/admin/ponentes?page=1');
+        }
+
+        $recordsPerPage = 5;
+        $totalRecords = Speaker::total();
+
+        $paginator = new Paginator($currentPage, $recordsPerPage, $totalRecords);
+        if ($currentPage > $paginator->getTotalPages()) {
+            redirect('/admin/ponentes?page=1');
+        }
+
+        $speakers = Speaker::paginate($recordsPerPage, $paginator->getOffset());
 
         $router->render('admin/speakers/index', [
             'title' => 'Ponentes / Conferencistas',
-            'speakers' => $speakers
+            'speakers' => $speakers,
+            'pagination' => $paginator->pagination()
         ]);
     }
 

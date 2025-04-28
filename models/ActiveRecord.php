@@ -73,10 +73,25 @@ abstract class ActiveRecord implements \JsonSerializable {
         return static::queryTable($query);
     }
 
+    public static function paginate($recordsPerPage, $offset) {
+        $column = self::$db->escape_string($recordsPerPage);
+        $value = self::$db->escape_string($offset);
+        $query = "SELECT * FROM " . static::$dbTable . " LIMIT {$recordsPerPage} OFFSET {$offset}";
+        $result = static::queryTable($query);
+        return $result;
+    }
+
     //Unrestricted querys
     public static function SQL($query) {
         $array = static::queryTable($query);
         return $array;
+    }
+
+    public static function total() {
+        $query = "SELECT COUNT(*) FROM " . static::$dbTable;
+        $result = self::$db->query($query);
+        $total = $result->fetch_array();
+        return array_shift($total);
     }
 
     public function save() {
