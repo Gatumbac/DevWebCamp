@@ -22,3 +22,34 @@ CREATE TABLE SPEAKERS (
     tags VARCHAR(120) DEFAULT NULL,
     networks TEXT DEFAULT NULL
 );
+
+CREATE TABLE CATEGORIES (
+  id int AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(45) NOT NULL
+);
+
+INSERT INTO CATEGORIES (name) VALUES ('Conferencia'), ('Workshop');
+
+CREATE TABLE DAYS (
+  id int AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(15) NOT NULL
+);
+
+INSERT INTO DAYS (name) VALUES ('Viernes'), ('Sábado');
+
+CREATE TABLE HOURS (
+  id int AUTO_INCREMENT PRIMARY KEY,
+  hour VARCHAR(13) NOT NULL
+);
+
+INSERT INTO HOURS (hour) VALUES
+('10:00 - 10:55'),
+('11:00 - 11:55'),
+('12:00 - 12:55'),
+('13:00 - 13:55'),
+('16:00 - 16:55'),
+('17:00 - 17:55'),
+('18:00 - 18:55'),
+('19:00 - 19:55');
+
+

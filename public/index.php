@@ -36,7 +36,14 @@ $router->post('/admin/ponentes/crear', [SpeakerController::class, 'processCreati
 $router->get('/admin/ponentes/editar', [SpeakerController::class, 'update']);
 $router->post('/admin/ponentes/editar', [SpeakerController::class, 'processUpdate']);
 $router->post('/admin/ponentes/eliminar', [SpeakerController::class, 'delete']);
+
 $router->get('/admin/eventos', [EventController::class, 'index']);
+$router->get('/admin/eventos/crear', [EventController::class, 'create']);
+$router->post('/admin/eventos/crear', [EventController::class, 'processCreation']);
+$router->get('/admin/eventos/editar', [EventController::class, 'update']);
+$router->post('/admin/eventos/editar', [EventController::class, 'processUpdate']);
+
+$router->post('/admin/ponentes/eliminar', [SpeakerController::class, 'delete']);
 $router->get('/admin/registrados', [AttendeeController::class, 'index']);
 $router->get('/admin/regalos', [GiftController::class, 'index']);
 

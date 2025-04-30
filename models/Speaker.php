@@ -6,14 +6,14 @@ class Speaker extends ActiveRecord {
     protected static $dbTable = 'SPEAKERS';
     protected static $dbColumns = ['id', 'name', 'lastname', 'city', 'country', 'image', 'tags', 'networks'];
 
-    public $id;
-    public $name;
-    public $lastname;
-    public $city;
-    public $country;
-    public $image;
-    public $tags;
-    public $networks;
+    protected $id;
+    protected $name;
+    protected $lastname;
+    protected $city;
+    protected $country;
+    protected $image;
+    protected $tags;
+    protected $networks;
 
     public function __construct($args = [])
     {
@@ -101,17 +101,17 @@ class Speaker extends ActiveRecord {
 
     public function validate() {
         self::$alerts = [];
-        if(!$this->name || strlen($this->name) < 3) {
+        if(!$this->name || strlen(trim($this->name)) < 3) {
             self::$alerts['error'][] = 'El Nombre es Obligatorio y debe ser válido';
         }
-        if(!$this->lastname || strlen($this->lastname) < 3) {
+        if(!$this->lastname || strlen(trim($this->lastname)) < 3) {
             self::$alerts['error'][] = 'El Apellido es Obligatorio y debe ser válido';
         }
-        if(!$this->city || strlen($this->city) < 2) {
-            self::$alerts['error'][] = 'El Campo Ciudad es Obligatorio';
+        if(!$this->city || strlen(trim($this->city)) < 2) {
+            self::$alerts['error'][] = 'El Campo Ciudad es Obligatorio y debe ser válido';
         }
-        if(!$this->country || strlen($this->country) < 3) {
-            self::$alerts['error'][] = 'El Campo País es Obligatorio';
+        if(!$this->country || strlen(trim($this->country)) < 2) {
+            self::$alerts['error'][] = 'El Campo País es Obligatorio y debe ser válido';
         }
         if(!$this->image) {
             self::$alerts['error'][] = 'La Imagen es obligatoria';

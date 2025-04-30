@@ -108,4 +108,20 @@
     &__image {
         max-width: 20rem;
     }
+
+    &__select {
+        @extend .form__input;
+    }
+
+    &__radio {
+        display: flex;
+        gap: 2rem;
+
+    }
+
+    &__radioContainer {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 }
