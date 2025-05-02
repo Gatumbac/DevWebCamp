@@ -190,6 +190,6 @@
 
 <?php 
     $script = "
-        <script src=/build/js/tags.js></script>
+        <script src=/build/js/tags.js defer></script>
     "
 ?>

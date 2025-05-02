@@ -52,4 +52,21 @@ INSERT INTO HOURS (hour) VALUES
 ('18:00 - 18:55'),
 ('19:00 - 19:55');
 
-
+CREATE TABLE EVENTS (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  description TEXT NOT NULL,
+  seat_quantity INT NOT NULL DEFAULT 50,
+  category_id INT NOT NULL,
+  day_id INT NOT NULL,
+  hour_id INT NOT NULL,
+  speaker_id INT NOT NULL,
+  INDEX idx_events_category (category_id),
+  INDEX idx_events_day (day_id),
+  INDEX idx_events_hour (hour_id),
+  INDEX idx_events_speaker (speaker_id),
+  CONSTRAINT fk_events_categories FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE RESTRICT,
+  CONSTRAINT fk_events_days FOREIGN KEY (day_id) REFERENCES days (id) ON DELETE RESTRICT,
+  CONSTRAINT fk_events_hours FOREIGN KEY (hour_id) REFERENCES hours (id) ON DELETE RESTRICT,
+  CONSTRAINT fk_events_speakers FOREIGN KEY (speaker_id) REFERENCES speakers (id) ON DELETE RESTRICT
+);

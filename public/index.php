@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 use Controllers\AttendeeController;
 use Controllers\AuthController;
 use Controllers\DashboardController;
+use Controllers\EventAPI;
 use Controllers\EventController;
 use Controllers\GiftController;
 use Controllers\SpeakerController;
@@ -46,6 +47,9 @@ $router->post('/admin/eventos/editar', [EventController::class, 'processUpdate']
 $router->post('/admin/ponentes/eliminar', [SpeakerController::class, 'delete']);
 $router->get('/admin/registrados', [AttendeeController::class, 'index']);
 $router->get('/admin/regalos', [GiftController::class, 'index']);
+
+//API
+$router->get('/api/horario-eventos', [EventAPI::class, 'index']);
 
 
 $router->checkRoute();

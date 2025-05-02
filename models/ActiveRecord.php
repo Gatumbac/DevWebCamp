@@ -66,6 +66,19 @@ abstract class ActiveRecord implements \JsonSerializable {
         return array_shift($result);
     }
 
+    public static function whereArray($array = []) {
+        $filter = '';
+        foreach($array as $key => $value) {
+            if($key === array_key_last($array)) {
+                $filter .= "{$key}='{$value}'";
+            } else {
+                $filter .= "{$key}='{$value}' AND ";
+            }
+        }
+        $query = "SELECT * FROM " . static::$dbTable . " WHERE " . $filter;
+        return static::queryTable($query);
+    }
+
     public static function belongsTo($column, $value) {
         $column = self::$db->escape_string($column);
         $value = self::$db->escape_string($value);

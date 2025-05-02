@@ -45,22 +45,26 @@
                     <input 
                         id="<?php echo strtolower($day->getName()); ?>"
                         type="radio"
-                        name="day_id"
+                        name="day"
                         value="<?php echo strtolower($day->getId()); ?>"
+                        required
                     >
                 </div>
             <?php endforeach; ?>
         </div>
+        <input type="hidden" name="day_id" value="">
     </div>
 
-    <div id="hours" class="form__field">
+    <div class="form__field">
         <label for="" class="form__label">Selecciona la hora</label>
         
-        <ul class="hours">
+        <ul id="hours" class="hours">
             <?php foreach($hours as $hour): ?>
-                <li class="hour"><?php echo $hour->getHour() ?></li>
+                <li data-hour-id="<?php echo $hour->getId() ?>" class="hours__hour hours__hour--disabled"><?php echo $hour->getHour() ?></li>
             <?php endforeach; ?>
         </ul>
+        
+        <input type="hidden" name="hour_id" value="">
     </div>
 
 </fieldset>
@@ -95,3 +99,9 @@
     </div>
 
 </fieldset>
+
+<?php 
+    $script = "
+        <script src=/build/js/hours.js defer></script>
+    "
+?>

@@ -10,7 +10,7 @@
         @include m.grid(2, 2rem);
     }
 
-    .hour {
+    &__hour {
         color: v.$blue;
         border: 1px solid v.$blue;
         border-radius: 1rem;
@@ -19,6 +19,21 @@
 
         &:hover {
             cursor: pointer;
+        }
+
+        &--selected {
+            color: v.$white;
+            background-color: v.$blue;
+        }
+
+        &--disabled {
+            color: v.$gray;
+            border: 1px solid v.$gray;
+            opacity: .5;
+
+            &:hover {
+                cursor: not-allowed;
+            }
         }
     }
 }
