@@ -189,7 +189,6 @@
 </fieldset>
 
 <?php 
-    $script = "
-        <script src=/build/js/tags.js defer></script>
-    "
+    $view_scripts = $view_scripts ?? [];
+    $view_scripts[] = '/build/js/tags.js';
 ?>

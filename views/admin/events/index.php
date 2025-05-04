@@ -6,3 +6,7 @@
         Añadir Evento
     </a>
 </div>
+
+<?php
+    require_once __DIR__ . '/../../templates/alerts.php';
+?>

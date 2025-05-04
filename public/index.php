@@ -7,6 +7,7 @@ use Controllers\DashboardController;
 use Controllers\EventAPI;
 use Controllers\EventController;
 use Controllers\GiftController;
+use Controllers\SpeakerAPI;
 use Controllers\SpeakerController;
 use MVC\Router;
 
@@ -50,6 +51,8 @@ $router->get('/admin/regalos', [GiftController::class, 'index']);
 
 //API
 $router->get('/api/horario-eventos', [EventAPI::class, 'index']);
+$router->get('/api/ponentes', [SpeakerAPI::class, 'index']);
+
 
 
 $router->checkRoute();

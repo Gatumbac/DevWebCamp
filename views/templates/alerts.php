@@ -1,6 +1,8 @@
 <?php 
+use Classes\FlashMessage;
 
-$alertsToValidate = $alerts ?? [];
+$formAlerts = $alerts ?? [];
+$alertsToValidate = FlashMessage::hasMessage() ? FlashMessage::getMessage() : $formAlerts;
 
 foreach($alertsToValidate as $type => $messages):
         foreach ($messages as $message): 

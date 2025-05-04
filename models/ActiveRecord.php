@@ -113,7 +113,7 @@ abstract class ActiveRecord implements \JsonSerializable {
         } else {
             $result = $this->update();
         }
-        return $result ?? false;
+        return $result;
     }
     
     public function create() {
@@ -133,7 +133,7 @@ abstract class ActiveRecord implements \JsonSerializable {
             'result' =>  $result ?? false,
             'error' => static::getLastError(),
             'id' => self::$db->insert_id
-         ];
+        ];
     }
 
     public function update() {
@@ -157,7 +157,11 @@ abstract class ActiveRecord implements \JsonSerializable {
             static::recordError($th->getMessage());
         }
 
-        return $result ?? false;
+        return [
+            'result' =>  $result ?? false,
+            'error' => static::getLastError(),
+            'id' => $this->id
+        ];
     }
 
     public function delete() {
@@ -170,7 +174,11 @@ abstract class ActiveRecord implements \JsonSerializable {
             static::recordError($th->getMessage());
         }
 
-        return $result ?? false;
+        return [
+            'result' =>  $result ?? false,
+            'error' => static::getLastError(),
+            'id' => $this->id
+        ];
     }
 
     public function getAttributes() {

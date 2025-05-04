@@ -20,7 +20,7 @@ class Event extends ActiveRecord {
         $this->id = $args['id'] ?? null;
         $this->name = $args['name'] ?? '';
         $this->description = $args['description'] ?? '';
-        $this->seat_quantity = $args['seat_quantity'] ?? 50; 
+        $this->seat_quantity = $args['seat_quantity'] ?? ''; 
         $this->category_id = $args['category_id'] ?? null;
         $this->day_id = $args['day_id'] ?? null;
         $this->hour_id = $args['hour_id'] ?? null;
@@ -110,8 +110,8 @@ class Event extends ActiveRecord {
         if(!$this->hour_id  || !filter_var($this->hour_id, FILTER_VALIDATE_INT)) {
             self::$alerts['error'][] = 'Elige la hora del evento';
         }
-        if(!$this->seat_quantity  || !filter_var($this->seat_quantity, FILTER_VALIDATE_INT)) {
-            self::$alerts['error'][] = 'Añade una cantidad de Lugares Disponibles';
+        if(!$this->seat_quantity  || !filter_var($this->seat_quantity, FILTER_VALIDATE_INT) || (int) $this->seat_quantity < 0) {
+            self::$alerts['error'][] = 'Añade una cantidad válida de Lugares Disponibles';
         }
         if(!$this->speaker_id || !filter_var($this->speaker_id, FILTER_VALIDATE_INT) ) {
             self::$alerts['error'][] = 'Selecciona la persona encargada del evento';

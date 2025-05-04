@@ -7,6 +7,10 @@
     </a>
 </div>
 
+<?php
+    require_once __DIR__ . '/../../templates/alerts.php';
+?>
+
 <div class="dashboard__baseContainer">
     <?php if(!empty($speakers)) { ?>
         <table class="table">

@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Classes\FlashMessage;
 use Model\Category;
 use Model\Speaker;
 use Model\Day;
@@ -41,13 +42,24 @@ class EventController {
         $event = new Event($_POST);
         $alerts = $event->validate();
 
+        if(empty($alerts)) {
+            $result = $event->save();
+            if($result['result']) {
+                FlashMessage::setSuccess();
+            } else {
+                FlashMessage::setError();
+            }
+            redirect('/admin/eventos');
+        }
+
         $router->render('admin/events/create', [
             'title' => 'Registrar Evento',
             'categories' => $categories, 
             'days' => $days,
             'hours' => $hours,
             'alerts' => $alerts,
-            'event' => $event
+            'event' => $event,
+            'view_scripts' => []
         ]);
     }
 }

@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Classes\ImageHandler;
 use Classes\Paginator;
+use Classes\FlashMessage;
 use MVC\Router;
 use Model\Speaker;
 
@@ -38,7 +39,8 @@ class SpeakerController {
         $speaker = new Speaker();
         $router->render('admin/speakers/create', [
             'title' => 'Registrar Ponente',
-            'speaker' => $speaker
+            'speaker' => $speaker,
+            'view_scripts' => []
         ]);
     }
 
@@ -54,16 +56,21 @@ class SpeakerController {
         if(empty($alerts)) {
             ImageHandler::processImage($_FILES["image"], $speaker->getImage(), IMAGE_FOLDER . '/speakers/');
 
-            if($speaker->save()) {
-                redirect('/admin/ponentes');
+            $result = $speaker->save();
+            if($result['result']) {
+                FlashMessage::setSuccess();
+            } else {
+                FlashMessage::setError();
             }
+            redirect('/admin/ponentes');
         }
 
         $router->render('admin/speakers/create', [
             'title' => 'Registrar Ponente',
             'speaker' => $speaker,
             'alerts' => $alerts,
-            'networks' => json_decode($speaker->getNetworks(), true)
+            'networks' => json_decode($speaker->getNetworks(), true),
+            'view_scripts' => []
         ]);
     }
 
@@ -74,7 +81,8 @@ class SpeakerController {
         $router->render('admin/speakers/update', [
             'title' => 'Editar Ponente',
             'speaker' => $speaker,
-            'networks' => json_decode($speaker->getNetworks(), true)
+            'networks' => json_decode($speaker->getNetworks(), true),
+            'view_scripts' => []
         ]);
     }
 
@@ -92,27 +100,36 @@ class SpeakerController {
                 $speaker->setImage(ImageHandler::getRandomName());
                 ImageHandler::processImage($_FILES["image"], $speaker->getImage(), IMAGE_FOLDER . '/speakers/');
             }
-            if($speaker->save()) {
-                redirect('/admin/ponentes');
+            $result = $speaker->save();
+            if($result['result']) {
+                FlashMessage::setSuccess();
+            } else {
+                FlashMessage::setError();
             }
+            redirect('/admin/ponentes');
         }
 
         $router->render('admin/speakers/update', [
             'title' => 'Editar Ponente',
             'speaker' => $speaker,
             'alerts' => $alerts,
-            'networks' => json_decode($speaker->getNetworks(), true)
+            'networks' => json_decode($speaker->getNetworks(), true),
+            'view_scripts' => []
         ]);
     }
 
     public static function delete() {
         isAdmin();
         $speaker = self::getSpeakerByForm($_POST);
-        if($speaker->delete()) {
+        $result = $speaker->delete();
+        if($result['result']) {
             ImageHandler::deleteImage(IMAGE_FOLDER . '/speakers/' . $speaker->getImage() . '.png');
             ImageHandler::deleteImage(IMAGE_FOLDER . '/speakers/' . $speaker->getImage() . '.webp');
-            redirect('/admin/ponentes');
+            FlashMessage::setSuccess();
+        } else {
+            FlashMessage::setDependencyError();
         }
+        redirect('/admin/ponentes');
     }
 
     public static function getSpeakerByForm($array) {

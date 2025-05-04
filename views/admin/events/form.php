@@ -81,6 +81,8 @@
             class="form__input"
             required
         >
+        <ul id="speakerList" class="speakerList"></ul>
+        <input type="hidden" name="speaker_id" value="">
     </div>
 
     <div class="form__field">
@@ -101,7 +103,7 @@
 </fieldset>
 
 <?php 
-    $script = "
-        <script src=/build/js/hours.js defer></script>
-    "
+    $view_scripts = $view_scripts ?? [];
+    $view_scripts[] = '/build/js/hours.js';
+    $view_scripts[] = '/build/js/speakers.js';
 ?>

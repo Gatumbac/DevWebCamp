@@ -25,6 +25,14 @@
             ?> 
         </main>
     </div>
-    <?php echo $script ?? ''; ?>
+
+    <?php 
+    $scripts = $view_scripts ?? [];
+    if (!empty($scripts)): 
+        foreach($scripts as $script_path):
+    ?>
+            <script src="<?php echo htmlspecialchars($script_path); ?>" defer></script>
+    <?php endforeach; ?>
+    <?php endif; ?>
 </body>
 </html>

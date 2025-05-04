@@ -1,5 +1,4 @@
 (function() {
-    const hours = document.querySelector('#hours');
     const days = document.querySelectorAll('[name="day"]');
     const dayInputHidden = document.querySelector('[name="day_id"]');
     const hourInputHidden = document.querySelector('[name="hour_id"]');
@@ -29,6 +28,8 @@
         search[e.target.name] = e.target.value;
         
         if (!Object.values(search).includes('')) {
+            hourInputHidden.value = '';
+            dayInputHidden.value = '';
             findEvents();
         }
     }
@@ -51,6 +52,7 @@
 
         hourList.forEach(hour => {
             hour.classList.add('hours__hour--disabled');
+            hour.classList.remove('hours__hour--selected');
             hour.removeEventListener('click', selectHour); // Remove old listener if any
         });
 
@@ -70,8 +72,7 @@
         }
         e.target.classList.add('hours__hour--selected')
         hourInputHidden.value = e.target.dataset.hourId;
+        dayInputHidden.value = document.querySelector('[name="day"]:checked').value;
     }
-
-
     
 })();
