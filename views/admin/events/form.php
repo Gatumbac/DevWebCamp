@@ -31,7 +31,12 @@
         <select name="category_id" id="categories" class="form__select">
             <option value="" selected disabled>--Seleccionar--</option>
             <?php foreach($categories as $category): ?>
-                <option <?php echo ($event->getCategoryId() == $category->getId()) ? 'selected' : '' ?> value="<?php echo $category->getId() ?>"><?php echo $category->getName() ?></option>
+                <option
+                    <?php echo ($event->getCategoryId() === $category->getId()) ? 'selected' : '' ?> 
+                    value="<?php echo $category->getId() ?>"
+                >
+                <?php echo $category->getName() ?>
+                </option>
             <?php endforeach; ?>
         </select>
     </div>
@@ -48,11 +53,12 @@
                         name="day"
                         value="<?php echo strtolower($day->getId()); ?>"
                         required
+                        <?php echo $day->getId() === $event->getDayId() ? 'checked' : ''?>
                     >
                 </div>
             <?php endforeach; ?>
         </div>
-        <input type="hidden" name="day_id" value="">
+        <input type="hidden" name="day_id" value="<?php echo s($event->getDayId());?>">
     </div>
 
     <div class="form__field">
@@ -60,11 +66,16 @@
         
         <ul id="hours" class="hours">
             <?php foreach($hours as $hour): ?>
-                <li data-hour-id="<?php echo $hour->getId() ?>" class="hours__hour hours__hour--disabled"><?php echo $hour->getHour() ?></li>
+                <li 
+                    data-hour-id="<?php echo $hour->getId() ?>" 
+                    class="hours__hour hours__hour--disabled"
+                >
+                <?php echo $hour->getHour() ?>
+                </li>
             <?php endforeach; ?>
         </ul>
         
-        <input type="hidden" name="hour_id" value="">
+        <input type="hidden" name="hour_id" value="<?php echo s($event->getHourId());?>">
     </div>
 
 </fieldset>
@@ -79,10 +90,9 @@
             type="text"
             placeholder="Buscar Ponente"
             class="form__input"
-            required
         >
         <ul id="speakerList" class="speakerList"></ul>
-        <input type="hidden" name="speaker_id" value="">
+        <input type="hidden" name="speaker_id" value="<?php echo s($event->getSpeakerId());?>">
     </div>
 
     <div class="form__field">

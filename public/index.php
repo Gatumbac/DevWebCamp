@@ -44,8 +44,8 @@ $router->get('/admin/eventos/crear', [EventController::class, 'create']);
 $router->post('/admin/eventos/crear', [EventController::class, 'processCreation']);
 $router->get('/admin/eventos/editar', [EventController::class, 'update']);
 $router->post('/admin/eventos/editar', [EventController::class, 'processUpdate']);
+$router->post('/admin/eventos/eliminar', [EventController::class, 'delete']);
 
-$router->post('/admin/ponentes/eliminar', [SpeakerController::class, 'delete']);
 $router->get('/admin/registrados', [AttendeeController::class, 'index']);
 $router->get('/admin/regalos', [GiftController::class, 'index']);
 

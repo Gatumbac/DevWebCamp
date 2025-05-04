@@ -18,7 +18,7 @@
         require_once __DIR__ . '/form.php';
         ?>
 
-        <input type="submit" value="Actualizar Ponente" class="form__submit form__submit--wide">
+        <input type="submit" value="Guardar Cambios" class="form__submit form__submit--wide">
 
     </form>
 

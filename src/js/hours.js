@@ -5,8 +5,8 @@
     const categoryInput = document.querySelector('[name="category_id"]'); 
 
     let search = {
-        category_id: '',
-        day: ''
+        category_id: categoryInput.value || '',
+        day: dayInputHidden.value || ''
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -15,6 +15,19 @@
     
     function start() {
         addListeners();
+        setInitialStyles();
+
+    }
+
+    async function setInitialStyles() {
+        if (!Object.values(search).includes('')) {
+            await findEvents();
+            const id = hourInputHidden.value || '';
+            const selectedHour = document.querySelector(`[data-hour-id="${id}"]`);
+            selectedHour.classList.remove('hours__hour--disabled');
+            selectedHour.classList.add('hours__hour--selected');
+            selectedHour.addEventListener('click', selectHour)
+        }
     }
 
     function addListeners() {
@@ -53,7 +66,7 @@
         hourList.forEach(hour => {
             hour.classList.add('hours__hour--disabled');
             hour.classList.remove('hours__hour--selected');
-            hour.removeEventListener('click', selectHour); // Remove old listener if any
+            hour.removeEventListener('click', selectHour);
         });
 
         const hourArray = Array.from(hourList);

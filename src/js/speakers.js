@@ -10,8 +10,21 @@
     })
     
     function start() {
-        findSpeakers();
+        initiazeSpeakerSelection();
         addInputListener();
+    }
+
+    async function initiazeSpeakerSelection() {
+        await findSpeakers();
+        const speakerId = speakerInputHidden.value || '';
+        if (speakerId) {
+            console.log('inicializando..')
+            filteredSpeakers = speakers.filter(speaker => speaker.id === speakerId);
+            showSpeakers(false);
+
+            const speakerHTML = document.querySelector(`[data-speaker-id="${speakerId}"]`);
+            speakerHTML.classList.add('speakerList__speaker--selected');
+        }
     }
 
     function addInputListener() {
@@ -49,9 +62,11 @@
         });
     }
 
-    function showSpeakers() {
+    function showSpeakers(cleanInput = true) {
         cleanContainer(speakerList);
-        speakerInputHidden.value = '';
+        if (cleanInput) {
+            speakerInputHidden.value = '';
+        }
 
         if (filteredSpeakers.length > 0) {
             filteredSpeakers.forEach(speaker => {

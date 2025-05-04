@@ -21,10 +21,10 @@ class Event extends ActiveRecord {
         $this->name = $args['name'] ?? '';
         $this->description = $args['description'] ?? '';
         $this->seat_quantity = $args['seat_quantity'] ?? ''; 
-        $this->category_id = $args['category_id'] ?? null;
-        $this->day_id = $args['day_id'] ?? null;
-        $this->hour_id = $args['hour_id'] ?? null;
-        $this->speaker_id = $args['speaker_id'] ?? null;
+        $this->category_id = $args['category_id'] ?? '';
+        $this->day_id = $args['day_id'] ?? '';
+        $this->hour_id = $args['hour_id'] ?? '';
+        $this->speaker_id = $args['speaker_id'] ?? '';
     }
 
     public function getId() {

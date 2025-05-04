@@ -68,7 +68,7 @@ CREATE TABLE EVENTS (
   CONSTRAINT fk_events_categories FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE RESTRICT,
   CONSTRAINT fk_events_days FOREIGN KEY (day_id) REFERENCES days (id) ON DELETE RESTRICT,
   CONSTRAINT fk_events_hours FOREIGN KEY (hour_id) REFERENCES hours (id) ON DELETE RESTRICT,
-  CONSTRAINT fk_events_speakers FOREIGN KEY (speaker_id) REFERENCES speakers (id) ON DELETE RESTRICT
+  CONSTRAINT fk_events_speakers FOREIGN KEY (speaker_id) REFERENCES speakers (id) ON DELETE RESTRICT,
   CONSTRAINT unique_event_schedule UNIQUE (day_id, hour_id, category_id),
   CONSTRAINT chk_seat_quantity CHECK (seat_quantity >= 0)
 );
