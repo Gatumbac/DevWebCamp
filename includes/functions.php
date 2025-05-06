@@ -33,6 +33,20 @@ function isAuth() {
     }
 }
 
+function verifyAuth() {
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    return isset($_SESSION['login']);
+}
+
+function verifyAdmin() {
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    return isset($_SESSION['admin']);
+}
+
 function isAdmin() {
     session_start();
     if (!isset($_SESSION['admin'])) {
@@ -42,5 +56,6 @@ function isAdmin() {
 }
 
 function verifyActualPage(string $path) : bool {
-    return str_contains($_SERVER['PATH_INFO'], $path);
+    $url = $_SERVER['PATH_INFO'] ?? '';
+    return str_contains($url, $path);
 }

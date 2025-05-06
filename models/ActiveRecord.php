@@ -86,6 +86,19 @@ abstract class ActiveRecord implements \JsonSerializable {
         return static::queryTable($query);
     }
 
+    public static function order($column, $order) {
+        $column = self::$db->escape_string($column);
+        $order = self::$db->escape_string($order);
+
+        if (!in_array(strtoupper($order), ['ASC', 'DESC'])) {
+            static::recordError("Invalid order parameter.");
+            return [];
+        }
+
+        $query = "SELECT * FROM " . static::$dbTable . " ORDER BY {$column} {$order}";
+        return static::queryTable($query);
+    }
+
     public static function paginate($recordsPerPage, $offset) {
         $recordsPerPage = self::$db->escape_string($recordsPerPage);
         $offset = self::$db->escape_string($offset);
@@ -108,8 +121,20 @@ abstract class ActiveRecord implements \JsonSerializable {
         return $result;
     }
 
-    //DB Operations
+    public static function orderSQL($SQL, $column, $order) {
+        $column = self::$db->escape_string($column);
+        $order = self::$db->escape_string($order);
 
+        if (!in_array(strtoupper($order), ['ASC', 'DESC'])) {
+            static::recordError("Invalid order parameter.");
+            return [];
+        }
+
+        $query = $SQL . "ORDER BY {$column} {$order}";
+        return static::queryTable($query);
+    }
+
+    //DB Operations
     public static function total() {
         $query = "SELECT COUNT(*) FROM " . static::$dbTable;
         $result = self::$db->query($query);

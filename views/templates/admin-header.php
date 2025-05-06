@@ -7,7 +7,6 @@
             <form class="dashboard__logout-form" action="/logout">
                 <input type="submit" class="dashboard__submit--logout" value="Cerrar Sesión">
             </form>
-
         </nav>
     </div>
 </header>

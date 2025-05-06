@@ -5,7 +5,6 @@ use Classes\FlashMessage;
 use Classes\Paginator;
 use Model\AdminEvent;
 use Model\Category;
-use Model\Speaker;
 use Model\Day;
 use Model\Hour;
 use Model\Event;

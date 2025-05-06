@@ -85,6 +85,14 @@
     text-align: center;
 }
 
+@mixin pageDescription {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: v.$thin;
+    color: v.$darkGray;
+    margin-bottom: 5rem;
+}
+
 @mixin fluidText($min, $max) {
     font-size: clamp($min, -0.8rem + 10vw, $max);
 }
@@ -173,4 +181,15 @@
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+@mixin card {
+    border: 1px solid color.adjust(v.$gray, $lightness: 10%);
+    padding: 3rem;
+
+    &__name {
+        font-weight: 900;
+        font-size: 2.6rem;
+        margin: 2rem 0;
+    }
 }

@@ -1,0 +1,38 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.packages {
+    @include m.container;
+    &__grid {
+        @include m.grid(1, 3rem);
+
+
+        @include m.tablet {
+            @include m.grid(3, 3rem);
+            align-items: flex-start;
+        }
+    }
+}
+
+.package {
+    @include m.card;
+    &:nth-child(2) {
+        order: -1;
+        @include m.tablet {
+            order: unset;
+        }
+    }
+
+    &__list {
+        @include m.resetList;
+        line-height: 2;
+    }
+
+    &__price {
+        font-size: 6rem;
+        margin: 3rem 0 0 0;
+        color: v.$blue;
+        font-weight: 900;
+        text-align: center;
+    }
+}

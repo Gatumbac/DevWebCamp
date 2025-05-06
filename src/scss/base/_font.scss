@@ -24,3 +24,7 @@ h3 {
 [class$="__heading"] {
     @include m.pageName;
 }
+
+[class$="__description"] {
+    @include m.pageDescription;
+}
