@@ -4,12 +4,25 @@ namespace Controllers;
 
 use Model\AdminEvent;
 use Model\Event;
+use Model\Speaker;
 use MVC\Router;
 
 class PageController {
     public static function index(Router $router) {
+        $formatedEvents = self::getFormatedEvents();
+        $totalSpeakers = Speaker::total();
+        $totalConferences = Event::total('category_id', 1);
+        $totalWorkshops = Event::total('category_id', 2);
+        $speakers = Speaker::all();
+
         $router->render('pages/index', [
-            'title' => 'Inicio'
+            'title' => 'Inicio',
+            'events' => $formatedEvents,
+            'view_scripts' => [],
+            'totalSpeakers' => $totalSpeakers,
+            'totalConferences' => $totalConferences,
+            'totalWorkshops' => $totalWorkshops,
+            'speakers' => $speakers
         ]);
     }
 
@@ -26,6 +39,16 @@ class PageController {
     }
 
     public static function conferences(Router $router) {
+        $formatedEvents = self::getFormatedEvents();
+
+        $router->render('pages/conferences', [
+            'title' => 'Conferencias & Workshops',
+            'events' => $formatedEvents,
+            'view_scripts' => []
+        ]);
+    }
+
+    public static function getFormatedEvents() {
         $events = AdminEvent::orderSQL(AdminEvent::getSQL(), 'hour_id', 'ASC');
         $formatedEvents = [];
 
@@ -47,10 +70,13 @@ class PageController {
             }
         }
 
-        $router->render('pages/conferences', [
-            'title' => 'Conferencias & Workshops',
-            'events' => $formatedEvents,
-            'view_scripts' => []
+        return $formatedEvents;
+    }
+
+    public static function error(Router $router) {
+        $router->render('pages/error404', [
+            'title' => 'Página no encontrada'
         ]);
     }
+
 }

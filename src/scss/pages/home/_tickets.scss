@@ -1,0 +1,86 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.tickets {
+    @include m.mediumContainer;
+
+    &__grid {
+        @include m.grid(1, 5rem);
+    }
+}
+
+.ticket {
+    width: min(100% - 5rem, 65rem);
+    margin: 0 auto;
+    padding: 6rem;
+    border-radius: 2rem;
+    color: v.$white;
+    position: relative;
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        background-color: v.$white;
+        width: 5rem;
+        height: 5rem;
+        top: calc(50% - 2.5rem);
+    }
+
+    &::before {
+        left: 0;
+        clip-path: circle(50% at 25% 50%);
+    }
+
+    &::after {
+        right: 0;
+        clip-path: circle(50% at 75% 50%);
+    }
+
+    &--onsite {
+        background-color:hsla(178,100%,39%,1);
+        background-image:
+        radial-gradient(at 11% 56%, hsla(209,100%,47%,1) 0px, transparent 50%),
+        radial-gradient(at 68% 81%, hsla(209,100%,47%,1) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(178,100%,39%,1) 0px, transparent 50%),
+        radial-gradient(at 89% 28%, hsla(209,100%,47%,1) 0px, transparent 50%),
+        radial-gradient(at 82% 11%, hsla(178,100%,39%,1) 0px, transparent 50%),
+        radial-gradient(at 36% 32%, hsla(209,100%,47%,1) 0px, transparent 50%),
+        radial-gradient(at 17% 83%, hsla(178,100%,39%,1) 0px, transparent 50%);
+    }
+
+    &--online {
+        background-color: v.$turquoise;
+    }
+
+    &--free {
+        background-color: v.$blue;
+    }
+
+    &__logo {
+        @include m.fluidText(2rem, 4rem);
+        @include m.logo;
+    }
+
+    &__plan {
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin: 3rem 0 0 0;
+    }
+
+    &__price {
+        margin: 3rem 0 0 0;
+        font-weight: 900;
+        font-size: 4rem;
+    }
+
+    &__linkContainer {
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__link {
+        @include m.button(v.$blue, v.$white);
+    }
+}

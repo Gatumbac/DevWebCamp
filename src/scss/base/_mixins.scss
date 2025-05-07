@@ -154,6 +154,28 @@
     }
 }
 
+@mixin tags($cursor: pointer) {
+    @include resetList;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+
+    > li {
+        background-color: v.$blue;
+        color: v.$white;
+        padding: 1rem;
+        border-radius: .5rem;
+        font-size: 1.4rem;
+        font-weight: v.$bold;
+
+    
+        &:hover {
+            cursor: $cursor;
+        }
+    }
+}
+
 @mixin alert($color) {
     background-color: color.adjust($color, $lightness: 55%);
     border-left: .5rem solid $color;

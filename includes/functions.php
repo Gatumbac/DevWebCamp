@@ -59,3 +59,9 @@ function verifyActualPage(string $path) : bool {
     $url = $_SERVER['PATH_INFO'] ?? '';
     return str_contains($url, $path);
 }
+
+function aos_animation() : string {
+    $efects = ["fade-up", "fade-down", "fade-left", "fade-right", "flip-left", "fade-right", "zoom-in", "zoom-in-up", "zoom-in-down", "zoom-out"];
+    $efect = array_rand($efects);
+    return $efects[$efect];
+}

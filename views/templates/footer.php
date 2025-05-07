@@ -1,4 +1,4 @@
-<footer class="footer">
+    <footer class="footer">
     <div class="footer__container">
         <div class="footer__content">
             <a href="/">
@@ -31,7 +31,11 @@
             </a>
         </nav>
     </div>
-    <p class="footer__copyright">
-        <span class="footer__copyright--bold">DevWebCamp </span> - Todos los derechos reservados <?php echo date('Y'); ?>
-    </p>
+    <div class="footer__copyBg">
+        <div class="footer__copyContainer">
+            <p class="footer__copyright">
+                <span class="footer__copyright--bold">DevWebCamp </span> - Todos los derechos reservados <?php echo date('Y'); ?>
+            </p>
+        </div>
+    </div>
 </footer>

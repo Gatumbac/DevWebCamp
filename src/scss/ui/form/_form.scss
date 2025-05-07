@@ -81,24 +81,7 @@
     }
 
     &__tagList {
-        @include m.resetList;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        margin-top: 1.5rem;
-
-        > li {
-            background-color: v.$blue;
-            color: v.$white;
-            padding: 1rem;
-            border-radius: .5rem;
-            font-size: 1.4rem;
-            font-weight: v.$bold;
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
+        @include m.tags;
     }  
 
     &__text {

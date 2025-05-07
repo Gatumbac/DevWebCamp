@@ -135,8 +135,13 @@ abstract class ActiveRecord implements \JsonSerializable {
     }
 
     //DB Operations
-    public static function total() {
+    public static function total($column = '', $value = '') {
+        $column = self::$db->escape_string($column);
+        $value = self::$db->escape_string($value);
         $query = "SELECT COUNT(*) FROM " . static::$dbTable;
+        if ($column) {
+            $query .= " WHERE {$column} = {$value}";
+        }
         $result = self::$db->query($query);
         $total = $result->fetch_array();
         return array_shift($total);

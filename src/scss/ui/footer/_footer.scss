@@ -30,8 +30,15 @@
         }
     }
 
-    &__copyright {
+    &__copyBg {
         background-color: color.adjust(v.$blue, $lightness: -10%);
+    }
+
+    &__copyContainer {
+        @include m.container;
+    }
+
+    &__copyright {
         margin: 3rem 0 0 0;
         padding: 2rem 0;
         text-align: center;

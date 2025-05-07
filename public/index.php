@@ -32,6 +32,7 @@ $router->get('/revisar-correo', [AuthController::class, 'emailInstructions']);
 $router->get('/confirmar-cuenta', [AuthController::class, 'confirmAccount']);
 
 $router->get('/', [PageController::class, 'index']);
+$router->get('/404', [PageController::class, 'error']);
 $router->get('/devwebcamp', [PageController::class, 'event']);
 $router->get('/paquetes', [PageController::class, 'packages']);
 $router->get('/conferencias-workshops', [PageController::class, 'conferences']);
