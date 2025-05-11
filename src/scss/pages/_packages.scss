@@ -30,9 +30,17 @@
 
     &__price {
         font-size: 6rem;
-        margin: 3rem 0 0 0;
+        margin: 3rem 0;
         color: v.$blue;
         font-weight: 900;
         text-align: center;
+    }
+
+    &__submit {
+        @include m.button(v.$blue, v.$white);
+
+        & {
+            margin-top: 3rem;
+        }
     }
 }

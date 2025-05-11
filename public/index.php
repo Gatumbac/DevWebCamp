@@ -8,13 +8,14 @@ use Controllers\EventAPI;
 use Controllers\EventController;
 use Controllers\GiftController;
 use Controllers\PageController;
+use Controllers\RegistrationController;
 use Controllers\SpeakerAPI;
 use Controllers\SpeakerController;
 use MVC\Router;
 
 $router = new Router();
 
-//Public Zone
+//Auth
 $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'processLogin']);
 $router->get('/logout', [AuthController::class, 'logout']);
@@ -31,11 +32,19 @@ $router->post('/reestablecer-password', [AuthController::class, 'processResetPas
 $router->get('/revisar-correo', [AuthController::class, 'emailInstructions']);
 $router->get('/confirmar-cuenta', [AuthController::class, 'confirmAccount']);
 
+//Pages
 $router->get('/', [PageController::class, 'index']);
 $router->get('/404', [PageController::class, 'error']);
 $router->get('/devwebcamp', [PageController::class, 'event']);
 $router->get('/paquetes', [PageController::class, 'packages']);
 $router->get('/conferencias-workshops', [PageController::class, 'conferences']);
+
+//User registration
+$router->get('/finalizar-registro', [RegistrationController::class, 'registration']);
+$router->post('/finalizar-registro/gratis', [RegistrationController::class, 'freePlan']);
+$router->post('/finalizar-registro/pagar', [RegistrationController::class, 'pay']);
+$router->get('/finalizar-registro/conferencias', [RegistrationController::class, 'conferences']);
+$router->get('/boleto', [RegistrationController::class, 'ticket']);
 
 //Admin Zone
 $router->get('/admin/dashboard', [DashboardController::class, 'index']);
@@ -59,8 +68,6 @@ $router->get('/admin/regalos', [GiftController::class, 'index']);
 //API
 $router->get('/api/horario-eventos', [EventAPI::class, 'index']);
 $router->get('/api/ponentes', [SpeakerAPI::class, 'index']);
-
-
 
 $router->checkRoute();
 

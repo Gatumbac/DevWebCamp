@@ -58,8 +58,16 @@
     }
 
     &__logo {
-        @include m.fluidText(2rem, 4rem);
+        @include m.fluidText(2rem, 3rem);
         @include m.logo;
+
+        & {
+            text-align: left;
+        }
+
+        @include m.tablet {
+            @include m.fluidText(2rem, 4rem);
+        }
     }
 
     &__plan {
@@ -82,5 +90,80 @@
 
     &__link {
         @include m.button(v.$blue, v.$white);
+    }
+
+    $modifier: &;
+
+    &--access {
+        width: 30rem;
+        height: 45rem;
+        padding: 10rem 3rem;
+
+        @include m.tablet {
+            width: 60rem;
+            height: 30rem;
+            padding: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        #{$modifier}__logo {
+            margin-top: 0;
+            text-align: left;
+            @include m.fluidText(2rem, 3rem);
+        }
+
+        #{$modifier}__name {
+            font-size: 2.4rem;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        #{$modifier}__id {
+            font-weight: 900;
+            font-size: 4rem;
+            text-align: center;
+            position: absolute;
+            bottom: 7rem;
+            margin: 0;
+            left: 0;
+            width: 100%;
+
+            @include m.tablet {
+                transform-origin: 0 0;
+                rotate: 90deg;
+                width: 30rem;
+                top: 0;
+                left: calc(100% - 5rem);
+            }
+
+        }
+
+        &::before {
+            top: 0;
+            left: calc(50% - 2.5rem);
+            clip-path: circle(50% at 50% 25%);
+
+            @include m.tablet {
+                top: calc(50% - 2.5rem);
+                left: 0;
+                clip-path: circle(50% at 25% 50%);
+            }
+        }
+
+        &::after {
+            top: calc(100% - 5rem);
+            left: calc(50% - 2.5rem);
+            clip-path: circle(50% at 50% 75%);
+
+            @include m.tablet {
+                top: calc(50% - 2.5rem);
+                left: unset;
+                right: 0;
+                clip-path: circle(50% at 75% 50%);
+            }
+        }
     }
 }

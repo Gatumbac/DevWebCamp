@@ -1,0 +1,135 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color' as c;
+
+.registration,
+.ticketPage,
+.conferences {
+    @include m.container;
+}
+
+
+.conferencesRegistration {
+
+    @include m.tablet {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+
+    &__heading {
+        margin: 2rem 0 3rem 0;
+        text-align: left;
+        color: v.$blue;
+        white-space: nowrap;
+        @include m.fluidText(2rem, 4rem);
+
+        &--workshops {
+            @extend .conferencesRegistration__heading;
+            color: v.$turquoise;
+            margin: 4rem 0 3rem 0;
+        }
+    }
+
+    &__list {
+        @include m.tablet {
+            flex: 0 0 60%;
+        }
+    }
+
+    &__grid {
+        @include m.grid(1, 3rem);
+        @include m.tablet {
+            @include m.grid(2, 3rem);
+        }
+    }
+
+    &__date {
+        margin: 4rem 0 3rem 0;
+        font-size: 2.5rem;
+        font-weight: v.$bold;
+    }
+}
+
+.userRegistration {
+    background-color: v.$lightGray;
+    padding: 3rem;
+    border-radius: 1rem;
+    margin-top: 3rem;
+
+    @include m.tablet {
+        margin-top: unset;
+        flex: 0 0 40%;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 3rem;
+    }
+
+    &__heading {
+        margin: 0 0 3rem 0;
+    }
+
+    &__summary {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    &__gift {
+        margin-top: 3rem;
+    }
+
+    &__select {
+        width: 100%;
+        background-color: v.$white;
+        border: 1px solid v.$gray;
+        padding: 1rem;
+        border-radius: .5rem;
+    }
+
+    &__label {
+        color: v.$darkGray;
+        display: block;
+        font-size: 2rem;
+        font-weight: v.$bold;
+        margin-bottom: 1rem;
+    }
+}
+
+.registrationEvent {
+    &__event {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__message {
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 1.8rem;
+    }
+
+    &__name {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: v.$bold;
+    }
+
+    &__button {
+        all: unset;
+        color: v.$red;
+
+        i {
+            font-size: 3rem;
+
+            @include m.tablet {
+                font-size: 2rem;
+            }
+        }
+        
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -49,6 +49,15 @@
     &__name {
         font-size: 2.4rem;
         margin: 0;
+
+        &--short {
+            @include m.tablet {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
     }
 
     &__content {
@@ -72,7 +81,6 @@
 
         @include m.tablet {
             -webkit-line-clamp: 2;
-            
         }
     }
 
@@ -91,5 +99,18 @@
 
     &__speaker-name {
         font-weight: v.$bold;
+    }
+
+    &__add {
+        @include m.button(v.$white, v.$black, 1rem);
+
+        & {
+            width: 100%;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: .5;
+        }
     }
 }

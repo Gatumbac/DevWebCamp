@@ -40,19 +40,19 @@ function verifyAuth() {
     return isset($_SESSION['login']);
 }
 
-function verifyAdmin() {
-    if(!isset($_SESSION)) {
-        session_start();
-    }
-    return isset($_SESSION['admin']);
-}
-
 function isAdmin() {
     session_start();
     if (!isset($_SESSION['admin'])) {
         header('Location: /login');
         exit;
     }
+}
+
+function verifyAdmin() {
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    return isset($_SESSION['admin']);
 }
 
 function verifyActualPage(string $path) : bool {
