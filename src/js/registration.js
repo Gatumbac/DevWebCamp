@@ -21,7 +21,7 @@
     }
 
     function addFormListener() {
-        form.addEventListener('submit', submitForm);
+        form.addEventListener('submit', verifyData);
     }
 
     function addEvent(e) {
@@ -90,7 +90,7 @@
         showEvents();
     }
 
-    function submitForm(e) {
+    function verifyData(e) {
         e.preventDefault();
         const giftId = document.querySelector('#gift').value;
         const eventsId = events.map(event => event.id);
@@ -98,6 +98,31 @@
         if(eventsId.length === 0 || giftId === '') {
             showErrorAlert("Datos Incompletos", "Elige al menos un evento y tu regalo")
             return;
+        }
+
+        submitForm(giftId, eventsId);
+    }
+
+    async function submitForm(giftId, eventsId) {
+        const url = '/finalizar-registro/conferencias';
+
+        const data = new FormData();
+        data.append('gift_id', giftId);
+        data.append('events_id', eventsId);
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: data
+            });
+            const result = await response.json();
+            if(result.result) {
+                showSuccessAlert('Registro Exitoso', 'Tus conferencias y regalo se han almacenado, te esperamos en DevWebCamp', `/boleto?id=${result.token}`);
+            } else {
+                showErrorAlert('Error', 'Hubo un error al almacenar tus conferencias y regalo');
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -107,6 +132,16 @@
             title: title,
             text: text
         });
+    }
+
+    function showSuccessAlert(title, text, url) {
+        Swal.fire({
+            icon: "success",
+            title: title,
+            text: text
+        }).then( () => {
+            window.location.href = url;
+        })
     }
 
 })();

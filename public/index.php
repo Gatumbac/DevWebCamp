@@ -44,6 +44,7 @@ $router->get('/finalizar-registro', [RegistrationController::class, 'registratio
 $router->post('/finalizar-registro/gratis', [RegistrationController::class, 'freePlan']);
 $router->post('/finalizar-registro/pagar', [RegistrationController::class, 'pay']);
 $router->get('/finalizar-registro/conferencias', [RegistrationController::class, 'conferences']);
+$router->post('/finalizar-registro/conferencias', [RegistrationController::class, 'saveRegistration']);
 $router->get('/boleto', [RegistrationController::class, 'ticket']);
 
 //Admin Zone

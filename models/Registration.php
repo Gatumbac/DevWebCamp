@@ -17,9 +17,9 @@ class Registration extends ActiveRecord {
         $this->id = $args['id'] ?? null;
         $this->package_id = $args['package_id'] ?? null;
         $this->user_id = $args['user_id'] ?? null;
-        $this->pay_id = $args['pay_id'] ?? null;
-        $this->token = $args['token'] ?? null;
-        $this->gift_id = $args['gift_id'] ?? null;
+        $this->pay_id = $args['pay_id'] ?? '';
+        $this->token = $args['token'] ?? '';
+        $this->gift_id = $args['gift_id'] ?? 1;
     }
 
     public function getId() {
@@ -44,6 +44,10 @@ class Registration extends ActiveRecord {
 
     public function getGiftId() {
         return $this->gift_id;
+    }
+
+    public function setGiftId($gift_id) {
+        $this->gift_id = $gift_id;
     }
     
     public function validate() {

@@ -3,6 +3,8 @@
 namespace Controllers;
 
 use Classes\FlashMessage;
+use Model\Event;
+use Model\EventRegistration;
 use Model\Gift;
 use Model\Package;
 use Model\Registration;
@@ -124,6 +126,11 @@ class RegistrationController {
         if($registration->getPackageId() !== '1') {
             redirect('/');
         }
+        
+        $registrationEvent = EventRegistration::where('registration_id', $registration->getId());
+        if(isset($registrationEvent)) {
+            self::redirectToTicket();
+        }
 
         $formatedEvents = PageController::getFormatedEvents();
         $gifts = Gift::all();
@@ -134,5 +141,89 @@ class RegistrationController {
             'gifts' => $gifts,
             'view_scripts' => []
         ]);
+    }
+
+    public static function saveRegistration() {
+        isAuth();
+        $events = self::getEvents($_POST);
+        $gift_id = $_POST['gift_id'] ?? '';
+        $gift_id = filter_var($gift_id, FILTER_VALIDATE_INT);
+
+        if (empty($events) || !$gift_id) {
+            echo json_encode(['result' => false, 'error' => 'Incomplete Data']);
+            return;
+        }
+
+        $registration = self::validatePremiumRegistration();
+        if(!$registration) {
+            return;
+        }
+
+        $eventsArray = self::validateEvents($events);
+        if (!$eventsArray) {
+            return;
+        }
+
+        self::saveEvents($eventsArray, $registration->getId());
+
+        $result = self::saveGift($registration, $gift_id);
+
+        echo json_encode(['result' => $result['result'], 'error' => $result['error'], 'token' => $registration->getToken()]);
+    }
+
+    public static function getEvents(array $post) {
+        $events_id = $post['events_id'] ?? '';
+        $events_id = explode(',', $events_id);
+
+        $events_id = array_filter($events_id, function($id) {
+            return is_numeric($id) && $id > 0;
+        });
+
+        return $events_id;
+    }
+
+    public static function validateEvents(array $events) {
+        $eventsArray = [];
+        foreach($events as $event_id) {
+            $event = Event::find($event_id);
+            if (!isset($event) || $event->getSeatQuantity() === "0") {
+                echo json_encode(['result' => false, 'error' => 'Invalid Events Or Seats']);
+                return false;
+            }
+            $eventsArray[] = $event;
+        }
+        return $eventsArray;
+    }
+
+    public static function saveEvents($eventsArray, $registration_id) {
+        foreach($eventsArray as $event) {
+            $event->setSeatQuantity($event->getSeatQuantity() - 1);
+            $event->save();
+            self::saveEventRegistration($event->getId(), $registration_id);
+        }
+    }
+
+    public static function saveEventRegistration($event_id, $registration_id) {
+        $data = [
+            'event_id' => (int) $event_id,
+            'registration_id' => (int) $registration_id
+        ];
+        $eventRegistration = new EventRegistration($data);
+        $eventRegistration->save();
+    }
+
+    public static function saveGift($registration, $gift_id) {
+        $registration->setGiftId($gift_id);
+        $result = $registration->save();
+        return $result;
+    }
+
+    public static function validatePremiumRegistration() {
+        $registration = self::getRegistration();
+        if(!$registration || $registration->getPackageId() !== "1") {
+            echo json_encode(['result' => false, 'error' => 'Incomplete Registration']);
+            return false;
+        }
+        return $registration;
     }
 }

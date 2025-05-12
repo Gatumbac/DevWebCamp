@@ -118,3 +118,15 @@ INSERT INTO `GIFTS` (`id`, `name`) VALUES
 ALTER TABLE registrations
 ADD COLUMN gift_id INT,
 ADD CONSTRAINT fk_gift_registration FOREIGN KEY (gift_id) REFERENCES GIFTS(id);
+
+CREATE TABLE `events_registration` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `event_id` int DEFAULT NULL,
+  `registration_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `event_id` (`event_id`),
+  KEY `registration_id` (`registration_id`),
+  CONSTRAINT `events_registration_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
+  CONSTRAINT `events_registration_ibfk_2` FOREIGN KEY (`registration_id`) REFERENCES `registrations` (`id`),
+  CONSTRAINT `unique_event_registration` UNIQUE (`event_id`, `registration_id`)
+); 

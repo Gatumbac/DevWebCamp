@@ -56,6 +56,9 @@
                             .then(result => {
                                 if(result.result) {
                                     window.location.href = '/finalizar-registro/conferencias';
+                                    return;
+                                } else {
+                                    console.log(result.error);
                                 }
                             })
                                 
