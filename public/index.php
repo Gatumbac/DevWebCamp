@@ -6,6 +6,7 @@ use Controllers\AuthController;
 use Controllers\DashboardController;
 use Controllers\EventAPI;
 use Controllers\EventController;
+use Controllers\GiftAPI;
 use Controllers\GiftController;
 use Controllers\PageController;
 use Controllers\RegistrationController;
@@ -69,6 +70,7 @@ $router->get('/admin/regalos', [GiftController::class, 'index']);
 //API
 $router->get('/api/horario-eventos', [EventAPI::class, 'index']);
 $router->get('/api/ponentes', [SpeakerAPI::class, 'index']);
+$router->get('/api/regalos', [GiftAPI::class, 'index']);
 
 $router->checkRoute();
 

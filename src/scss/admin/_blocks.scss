@@ -1,0 +1,66 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color';
+
+.blocks {
+    @include m.tablet {
+        margin-top: 5rem;
+    }
+
+    &__grid {
+        @include m.grid(1, 3rem);
+
+        @include m.desktop {
+            @include m.grid(2, 3rem);
+        }
+    }
+}
+
+.block {
+    padding: 3rem;
+    color: v.$white;
+    border-radius: 1rem;
+
+    &:nth-child(1) {
+        @include m.bg-gradient(#F97316);
+    }
+
+    &:nth-child(2) {
+        @include m.bg-gradient(#A855F7);
+    }
+
+    &:nth-child(3) {
+        @include m.bg-gradient(#65A30D);
+    }
+
+    &:nth-child(4) {
+        @include m.bg-gradient(#17769E);
+    }
+
+    &__heading {
+        margin: 1rem 0 2rem 0;
+        font-size: 3.5rem;
+    }
+
+    &__text {
+        margin: 1rem 0;
+        font-size: 2rem;
+        text-align: center;
+        font-weight: 700;
+
+        &--income {
+            @extend .block__text;
+            margin-top: 5rem;
+            font-size: 6rem;
+            text-align: center;
+            font-weight: 900;
+        }
+
+        &--event {
+            @extend .block__text;
+            font-size: 1.8rem;
+            text-align: left;
+            font-weight: 400;
+        }
+    }
+}

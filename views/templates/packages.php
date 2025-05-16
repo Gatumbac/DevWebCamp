@@ -58,14 +58,11 @@
                                     window.location.href = '/finalizar-registro/conferencias';
                                     return;
                                 } else {
-                                    console.log(result.error);
+                                    const element = document.getElementById('paypal-button-container');
+                                    element.innerHTML = '';
+                                    element.innerHTML = `<h3 style="text-align: center;">Ocurrió un error al procesar tu pago en DevWebCamp</h3>`;
                                 }
                             })
-                                
-
-                            const element = document.getElementById('paypal-button-container');
-                            element.innerHTML = '';
-                            element.innerHTML = `<h3 style="text-align: center;">Ocurrió un error al procesar tu pago en DevWebCamp</h3>`;
                         });
                     },
 
@@ -87,5 +84,53 @@
             <li class="package__element">Acceso a Grabaciones</li>
         </ul>
         <p class="package__price">$49</p>
+        <?php if ($isUserRegistration) : ?>
+            <div id="paypal-button-container-virtual"></div>
+                
+                <script>
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                        purchase_units: [{
+                            custom_id: "2",
+                            description: "Pago Virtual DevWebCamp",
+                            amount: {
+                            currency_code: "USD",
+                            value: '49.00'  
+                            }
+                        }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(orderData) {
+
+                            const data = new FormData();
+                            data.append('package_id', orderData.purchase_units[0].custom_id);
+                            data.append('pay_id', orderData.purchase_units[0].payments.captures[0].id);
+                            fetch('/finalizar-registro/pagar', {
+                                method: 'POST',
+                                body: data
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                                if(result.result) {
+                                    window.location.href = '/finalizar-registro';
+                                    return;
+                                } else {
+                                    const element = document.getElementById('paypal-button-container-virtual');
+                                    element.innerHTML = '';
+                                    element.innerHTML = `<h3 style="text-align: center;">Ocurrió un error al procesar tu pago en DevWebCamp</h3>`;
+                                }
+                            })
+                        });
+                    },
+
+                    onError: function (err) {
+                        console.log(err);
+                    }
+                }).render('#paypal-button-container-virtual');
+                </script>
+
+        <?php endif; ?>
     </div>
 </div>

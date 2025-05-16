@@ -6,6 +6,11 @@ use Model\Event;
 
 class EventAPI {
     public static function index() {
+        if(!verifyAdmin()) {
+            echo json_encode([]);
+            return;
+        }
+        
         $day_id = $_GET['day_id'] ?? '';
         $category_id = $_GET['category_id'] ?? '';
 

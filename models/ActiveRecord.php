@@ -69,6 +69,8 @@ abstract class ActiveRecord implements \JsonSerializable {
     public static function whereArray($array = []) {
         $filter = '';
         foreach($array as $key => $value) {
+            $key = self::$db->escape_string($key);
+            $value = self::$db->escape_string($value);
             if($key === array_key_last($array)) {
                 $filter .= "{$key}='{$value}'";
             } else {
@@ -86,9 +88,10 @@ abstract class ActiveRecord implements \JsonSerializable {
         return static::queryTable($query);
     }
 
-    public static function order($column, $order) {
+    public static function order($column, $order, $limit = '') {
         $column = self::$db->escape_string($column);
         $order = self::$db->escape_string($order);
+        $limit = self::$db->escape_string($limit);
 
         if (!in_array(strtoupper($order), ['ASC', 'DESC'])) {
             static::recordError("Invalid order parameter.");
@@ -96,6 +99,9 @@ abstract class ActiveRecord implements \JsonSerializable {
         }
 
         $query = "SELECT * FROM " . static::$dbTable . " ORDER BY {$column} {$order}";
+        if ($limit) {
+            $query.= " LIMIT {$limit}";
+        }
         return static::queryTable($query);
     }
 
@@ -134,6 +140,20 @@ abstract class ActiveRecord implements \JsonSerializable {
         return static::queryTable($query);
     }
 
+        public static function limitSQL($SQL, $column, $order, $limit) {
+        $column = self::$db->escape_string($column);
+        $order = self::$db->escape_string($order);
+        $limit = self::$db->escape_string($limit);
+
+        if (!in_array(strtoupper($order), ['ASC', 'DESC'])) {
+            static::recordError("Invalid order parameter.");
+            return [];
+        }
+
+        $query = $SQL . "ORDER BY {$column} {$order} LIMIT {$limit}";
+        return static::queryTable($query);
+    }
+
     //DB Operations
     public static function total($column = '', $value = '') {
         $column = self::$db->escape_string($column);
@@ -142,6 +162,23 @@ abstract class ActiveRecord implements \JsonSerializable {
         if ($column) {
             $query .= " WHERE {$column} = {$value}";
         }
+        $result = self::$db->query($query);
+        $total = $result->fetch_array();
+        return array_shift($total);
+    }
+
+    public static function totalArray($array = []) {
+        $filter = '';
+        foreach($array as $key => $value) {
+            $key = self::$db->escape_string($key);
+            $value = self::$db->escape_string($value);
+            if($key === array_key_last($array)) {
+                $filter .= "{$key}='{$value}'";
+            } else {
+                $filter .= "{$key}='{$value}' AND ";
+            }
+        }
+        $query = "SELECT COUNT(*) FROM " . static::$dbTable . " WHERE {$filter}";
         $result = self::$db->query($query);
         $total = $result->fetch_array();
         return array_shift($total);
