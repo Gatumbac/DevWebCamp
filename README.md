@@ -3,6 +3,7 @@
 **DevWebCamp** es una plataforma web completa para la **gestión integral de un evento de conferencias y workshops para desarrolladores**. Su propósito es facilitar tanto la **divulgación del evento** como la **organización logística y administrativa**, ofreciendo una experiencia moderna y eficiente para los asistentes y para el equipo organizador.
 
 Este proyecto fue desarrollado como parte de mi formación en desarrollo web full stack, aplicando principios sólidos de **programación backend con PHP**, **arquitectura MVC**, **seguridad**, e integración con bases de datos y pagos en línea.
+
 ---
 
 ## 📖 Descripción  
